@@ -21,7 +21,8 @@ namespace EPiServer.Reference.Commerce.Site.Features.Search
 		[NonSerialized]
 		private readonly ILogger _logger;
 
-		private readonly string _applicationName;
+
+	    private readonly string _applicationName;
 
 		[method: CompilerGenerated]
 		[CompilerGenerated]

@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ConfigurePayment.ascx.cs" Inherits="EPiServer.Business.Commerce.Payment.PayPal.ConfigurePayment" %>
-<div id="DataForm">
+<div id="DataForm"> 
     <table cellpadding="0" cellspacing="2">
 	    <tr>
 		    <td class="FormLabelCell" colspan="2"><b><asp:Literal ID="Literal1" runat="server" Text="Configure PayPal Account" /></b></td>

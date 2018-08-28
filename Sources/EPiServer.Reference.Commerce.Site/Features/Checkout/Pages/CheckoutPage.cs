@@ -1,3 +1,4 @@
+using EPiServer.Business.Commerce.Payment.PayPal;
 using EPiServer.Core;
 using EPiServer.DataAnnotations;
 using EPiServer.Reference.Commerce.Site.Features.Start.Pages;
@@ -7,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 namespace EPiServer.Reference.Commerce.Site.Features.Checkout.Pages
 {
     [ContentType(DisplayName = "Checkout page", GUID = "6709cd32-7bb6-4d29-9b0b-207369799f4f", Description = "", AvailableInEditMode = false)]
-    [AvailableContentTypes(Include = new [] { typeof(OrderConfirmationPage), typeof(MultiShipmentPage) }, IncludeOn = new [] {typeof(StartPage)})]
+    [AvailableContentTypes(Include = new [] { typeof(OrderConfirmationPage), typeof(MultiShipmentPage), typeof(PayPalPage) }, IncludeOn = new [] {typeof(StartPage)})]
     [ImageUrl("~/styles/images/page_type.png")]
     public class CheckoutPage : PageData
     { 

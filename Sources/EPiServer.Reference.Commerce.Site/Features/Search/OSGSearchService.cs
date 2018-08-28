@@ -33,7 +33,8 @@ namespace EPiServer.Reference.Commerce.Site.Features.Search
 			}
 		}
 
-		private static SearchProvider InitializeConfiguredProvider()
+
+	    private static SearchProvider InitializeConfiguredProvider()
 		{
 			SearchProviderElement searchProviders = SearchConfiguration.Instance.SearchProviders;
 			if (searchProviders.Providers == null)

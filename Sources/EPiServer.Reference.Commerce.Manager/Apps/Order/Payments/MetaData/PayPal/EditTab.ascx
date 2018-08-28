@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="EditTab.ascx.cs" Inherits="EPiServer.Business.Commerce.Payment.PayPal.EditTab" %>
-<div id="DataForm">
+<div id="DataForm"> 
     <table class="DataForm">
         <tr>
             <td class="FormLabelCell" style="color: Red">
