@@ -15,6 +15,7 @@ namespace EPiServer.Reference.Commerce.Site.Infrastructure.Facades
         public enum SearchProviderType
         {
             Lucene,
+            FindSearch,
             Unknown
         }
 
