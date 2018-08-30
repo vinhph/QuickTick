@@ -848,6 +848,7 @@
     <Content Include="modules\_protected\EPiServer.Cms.TinyMce\web.config" />
     <Content Include="modules\_protected\EPiServer.Cms.TinyMce\EPiServer.Cms.TinyMce.zip" />
     <Content Include="App_Data\GeoLiteCity.dat" />
+    <Content Include="License.config" />
     <None Include="packages.config" />
     <Content Include="readme.md" />
     <Content Include="Styles\Pages\addressbook.less" />
