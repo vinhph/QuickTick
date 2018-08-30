@@ -260,4 +260,4 @@ paket-files/
 __pycache__/
 *.pyc
 
-Sources/EPiServer.Reference.Commerce.Site/License.config
+/Sources/EPiServer.Reference.Commerce.Site/License.config
