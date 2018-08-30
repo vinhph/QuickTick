@@ -21,7 +21,9 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Web.Helpers;
+using EPiServer.Find;
 using EPiServer.Globalization;
+using EPiServer.Reference.Commerce.Site.Features.Product.Models;
 
 namespace EPiServer.Reference.Commerce.Site.Features.Search.Services
 {
@@ -193,6 +195,16 @@ namespace EPiServer.Reference.Commerce.Site.Features.Search.Services
 
         private CustomSearchResult Search(CatalogEntrySearchCriteria criteria, IContent currentContent)
         {
+            IClient client = new Client(serviceUrl: "https://es-eu-dev-api01.episerver.net/F05MNJ7EvA4UBTWTg2ovBmuV8LpUH9Ts/",
+                defaultIndex: "phvinh_myindex");
+            var vinh = new FashionProduct(){ Name = "vinh 's shoes"};
+            var success = client.Index(vinh);
+
+            var result = client.Search<FashionProduct>()
+                .For("shoes")
+                .GetResult();
+
+
             var nodeContent = currentContent as NodeContent;
             if (nodeContent != null)
             {

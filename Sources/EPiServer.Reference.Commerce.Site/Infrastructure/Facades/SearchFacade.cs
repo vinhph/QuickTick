@@ -65,9 +65,14 @@ namespace EPiServer.Reference.Commerce.Site.Infrastructure.Facades
 
             var providerType = Type.GetType(element.Providers[element.DefaultProvider].Type);
             var baseType = Type.GetType("Mediachase.Search.Providers.Lucene.LuceneSearchProvider, Mediachase.Search.LuceneSearchProvider");
+            var ePiFindType = Type.GetType("EPiServer.Commerce.FindSearchProvider.FindSearchProvider, EPiServer.Commerce.FindSearchProvider");
             if (providerType == null || baseType == null)
             {
                 return SearchProviderType.Unknown;
+            }
+            if (providerType == ePiFindType || providerType.IsSubclassOf(baseType))
+            {
+                return SearchProviderType.FindSearch;
             }
             if (providerType == baseType || providerType.IsSubclassOf(baseType))
             {
