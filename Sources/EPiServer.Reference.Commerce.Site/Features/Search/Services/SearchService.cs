@@ -22,6 +22,8 @@ using System.Linq;
 using System.Text;
 using System.Web.Helpers;
 using EPiServer.Find;
+using EPiServer.Find.Cms;
+using EPiServer.Find.Commerce;
 using EPiServer.Globalization;
 using EPiServer.Reference.Commerce.Site.Features.Product.Models;
 
@@ -195,15 +197,44 @@ namespace EPiServer.Reference.Commerce.Site.Features.Search.Services
 
         private CustomSearchResult Search(CatalogEntrySearchCriteria criteria, IContent currentContent)
         {
+            /* 
             IClient client = new Client(serviceUrl: "https://es-eu-dev-api01.episerver.net/F05MNJ7EvA4UBTWTg2ovBmuV8LpUH9Ts/",
                 defaultIndex: "phvinh_myindex");
-            var vinh = new FashionProduct(){ Name = "vinh 's shoes"};
-            var success = client.Index(vinh);
+            //var vinh = new FashionProduct(){ Name = "vinh 's shoes"};
+            //var success = client.Index(vinh);
 
-            var result = client.Search<FashionProduct>()
-                .For("shoes")
-                .GetResult();
+            //IContentResult<FashionProduct> result = client.Search<FashionProduct>().GetContentResult();
+            IContentResult<FashionVariant> results = client.Search<FashionVariant>().FilterOnCurrentMarket().GetContentResult();
+            ISearchDocuments documents = new SearchDocuments();
+            foreach (var variation in results)
+            {
+                ISearchDocument doc = new SearchDocument();
 
+                ISearchField field = new SearchField("displayname", variation.DisplayName);
+                doc.Add(field);
+
+                field = new SearchField("code", variation.Code);
+                doc.Add(field);
+
+                field = new SearchField("Red", variation.Color);
+                doc.Add(field);
+
+                field = new SearchField("13", variation.Size);
+                doc.Add(field);
+
+                field = new SearchField("image_url", variation.DefaultImageUrl());
+                doc.Add(field); 
+
+                documents.Add(doc);
+            }
+            ISearchResults searchResultOfMine = new SearchResults(documents, criteria);
+            return new CustomSearchResult
+            {
+                ProductViewModels = CreateProductViewModels(searchResultOfMine),
+                SearchResult = searchResultOfMine,
+                FacetGroups = new List<FacetGroupOption>()
+            };
+            */
 
             var nodeContent = currentContent as NodeContent;
             if (nodeContent != null)

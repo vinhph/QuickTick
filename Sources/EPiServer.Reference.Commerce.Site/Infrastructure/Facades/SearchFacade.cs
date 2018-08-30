@@ -4,6 +4,7 @@ using Mediachase.Commerce.Core;
 using Mediachase.Commerce.Website.Search;
 using Mediachase.Search;
 using Mediachase.Search.Extensions;
+using OSG.Utilities;
 using StringCollection = System.Collections.Specialized.StringCollection;
 using AppContext = Mediachase.Commerce.Core.AppContext;
 
@@ -19,7 +20,7 @@ namespace EPiServer.Reference.Commerce.Site.Infrastructure.Facades
             Unknown
         }
 
-        private SearchManager _searchManager;
+        private OFindManage _searchManager;
         private SearchProviderType _searchProviderType;
         private bool _initialized;
 
@@ -48,7 +49,7 @@ namespace EPiServer.Reference.Commerce.Site.Infrastructure.Facades
             {
                 return;
             }
-            _searchManager = new SearchManager(AppContext.Current.ApplicationName);
+            _searchManager = new OFindManage(AppContext.Current.ApplicationName);
             _searchProviderType = LoadSearchProvider();
             _initialized = true;
         }
