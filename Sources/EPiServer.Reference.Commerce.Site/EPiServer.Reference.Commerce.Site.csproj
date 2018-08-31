@@ -985,6 +985,10 @@
     <Content Include="Views\Shared\_Facet.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\OSG.Search\OSG.Search.csproj">
+      <Project>{c60aeb20-769b-4714-93e0-7c93a98d0c0a}</Project>
+      <Name>OSG.Search</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\OSG.Utilities\OSG.Utilities.csproj">
       <Project>{7ec1d380-bb59-4565-8d36-cbc92a110f79}</Project>
       <Name>OSG.Utilities</Name>

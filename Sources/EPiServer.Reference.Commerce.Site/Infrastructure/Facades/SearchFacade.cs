@@ -17,6 +17,7 @@ namespace EPiServer.Reference.Commerce.Site.Infrastructure.Facades
         {
             Lucene,
             FindSearch,
+            OSGSearch,
             Unknown
         }
 
@@ -65,17 +66,22 @@ namespace EPiServer.Reference.Commerce.Site.Infrastructure.Facades
             }
 
             var providerType = Type.GetType(element.Providers[element.DefaultProvider].Type);
-            var baseType = Type.GetType("Mediachase.Search.Providers.Lucene.LuceneSearchProvider, Mediachase.Search.LuceneSearchProvider");
+            var luceneType = Type.GetType("Mediachase.Search.Providers.Lucene.LuceneSearchProvider, Mediachase.Search.LuceneSearchProvider");
             var ePiFindType = Type.GetType("EPiServer.Commerce.FindSearchProvider.FindSearchProvider, EPiServer.Commerce.FindSearchProvider");
-            if (providerType == null || baseType == null)
+            var osgFindType = Type.GetType("OSG.Search.OSGSearchProvider, OSG.Search");
+            if (providerType == null || luceneType == null)
             {
                 return SearchProviderType.Unknown;
             }
-            if (providerType == ePiFindType || providerType.IsSubclassOf(baseType))
+            if (ePiFindType != null && (providerType == ePiFindType || providerType.IsSubclassOf(ePiFindType)))
             {
                 return SearchProviderType.FindSearch;
             }
-            if (providerType == baseType || providerType.IsSubclassOf(baseType))
+            if (osgFindType != null && (providerType == osgFindType || providerType.IsSubclassOf(osgFindType)))
+            {
+                return SearchProviderType.OSGSearch;
+            }
+            if (providerType == luceneType || providerType.IsSubclassOf(luceneType))
             {
                 return SearchProviderType.Lucene;
             }
