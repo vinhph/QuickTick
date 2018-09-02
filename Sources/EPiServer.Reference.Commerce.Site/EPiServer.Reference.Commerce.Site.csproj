@@ -449,6 +449,9 @@
     <Compile Include="Features\Market\Models\EmptyMarket.cs" />
     <Compile Include="Features\Market\Services\MarketContentLoader.cs" />
     <Compile Include="Features\Navigation\ViewModels\FooterViewModel.cs" />
+    <Compile Include="Features\OSGCustomize\Controllers\IndexJobController.cs" />
+    <Compile Include="Features\OSGCustomize\Pages\IndexJob.cs" />
+    <Compile Include="Features\OSGCustomize\ViewModels\IndexJobViewModel.cs" />
     <Compile Include="Features\Payment\Controllers\PaymentController.cs" />
     <Compile Include="Features\Payment\PaymentMethods\AuthorizePaymentMethod.cs" />
     <Compile Include="Features\Payment\PaymentMethods\CashOnDeliveryPaymentMethod.cs" />
@@ -859,6 +862,7 @@
     <Content Include="Views\Login\Unapproved.cshtml" />
     <Content Include="Views\Shared\_PayPal.cshtml" />
     <Content Include="Views\Shared\_PayPalConfirmation.cshtml" />
+    <Content Include="Views\IndexJob\Index.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

@@ -7,6 +7,13 @@ using EPiServer.Reference.Commerce.Site.Features.Search.ViewModels;
 using EPiServer.Web.Mvc;
 using Mediachase.Commerce.Catalog;
 using System.Web.Mvc;
+using EPiServer.Commerce.Catalog.ContentTypes;
+using EPiServer.Find;
+using EPiServer.Find.Cms;
+using EPiServer.Find.Commerce;
+using EPiServer.Find.Framework;
+using Mediachase.Commerce;
+using Mediachase.Commerce.Core;
 
 namespace EPiServer.Reference.Commerce.Site.Features.Search.Controllers
 {
@@ -29,6 +36,10 @@ namespace EPiServer.Reference.Commerce.Site.Features.Search.Controllers
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
         public async Task<ViewResult> Index(FashionNode currentContent, FilterOptionViewModel viewModel)
         {
+            //vinhph Test
+            //var results = SearchClient.Instance.Search<VariationContent>().FilterOnCurrentMarket().GetContentResult();
+            //var result = SearchClient.Instance.Search<VariationContent>().Filter(x => x.DefaultPrice().UnitPrice.LessThan(new Money(2000000000, SiteContext.Current.Currency))).GetContentResult();
+
             var model = _viewModelFactory.Create(currentContent, viewModel);
 
             if (HttpContext.Request.HttpMethod == "GET")
