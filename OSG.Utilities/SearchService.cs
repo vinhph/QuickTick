@@ -37,7 +37,7 @@ namespace OSG.Utilities
         /// <returns></returns>
         public static ISearchResults Search(string applicationName, ISearchCriteria criteria)
         {
-            ISearchResults results = Provider.Search(applicationName, new Mediachase.Search.Extensions.CatalogEntrySearchCriteria());
+            ISearchResults results = Provider.Search(applicationName, criteria);
             return results;
         }
 

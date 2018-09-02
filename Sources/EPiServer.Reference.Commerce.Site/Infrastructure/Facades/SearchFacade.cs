@@ -21,7 +21,7 @@ namespace EPiServer.Reference.Commerce.Site.Infrastructure.Facades
             Unknown
         }
 
-        private OFindManage _searchManager;
+        private SearchManager _searchManager;
         private SearchProviderType _searchProviderType;
         private bool _initialized;
 
@@ -50,7 +50,7 @@ namespace EPiServer.Reference.Commerce.Site.Infrastructure.Facades
             {
                 return;
             }
-            _searchManager = new OFindManage(AppContext.Current.ApplicationName);
+            _searchManager = new SearchManager(AppContext.Current.ApplicationName);
             _searchProviderType = LoadSearchProvider();
             _initialized = true;
         }
@@ -68,7 +68,7 @@ namespace EPiServer.Reference.Commerce.Site.Infrastructure.Facades
             var providerType = Type.GetType(element.Providers[element.DefaultProvider].Type);
             var luceneType = Type.GetType("Mediachase.Search.Providers.Lucene.LuceneSearchProvider, Mediachase.Search.LuceneSearchProvider");
             var ePiFindType = Type.GetType("EPiServer.Commerce.FindSearchProvider.FindSearchProvider, EPiServer.Commerce.FindSearchProvider");
-            var osgFindType = Type.GetType("OSG.Search.OSGSearchProvider, OSG.Search");
+            var osgFindType = Type.GetType("OSG.Search.FindSearchProvider, OSG.Search");
             if (providerType == null || luceneType == null)
             {
                 return SearchProviderType.Unknown;

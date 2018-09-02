@@ -54,6 +54,9 @@
     <Reference Include="EPiServer.Cms.AspNet, Version=11.9.1.0, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
       <HintPath>..\packages\EPiServer.CMS.AspNet.11.9.1\lib\net461\EPiServer.Cms.AspNet.dll</HintPath>
     </Reference>
+    <Reference Include="EPiServer.Cms.Shell.UI, Version=11.5.1.0, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPiServer.CMS.UI.Core.11.5.1\lib\net461\EPiServer.Cms.Shell.UI.dll</HintPath>
+    </Reference>
     <Reference Include="EPiServer.Commerce.FindSearchProvider, Version=10.0.1.0, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
       <HintPath>..\packages\EPiServer.Commerce.FindSearchProvider.10.0.1\lib\net461\EPiServer.Commerce.FindSearchProvider.dll</HintPath>
     </Reference>
@@ -78,8 +81,23 @@
     <Reference Include="EPiServer.Find, Version=13.0.1.0, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
       <HintPath>..\packages\EPiServer.Find.13.0.1\lib\net461\EPiServer.Find.dll</HintPath>
     </Reference>
+    <Reference Include="EPiServer.Find.Blocks, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPiServer.Find.Cms.13.0.1\lib\net461\EPiServer.Find.Blocks.dll</HintPath>
+    </Reference>
+    <Reference Include="EPiServer.Find.Cms, Version=13.0.1.0, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPiServer.Find.Cms.13.0.1\lib\net461\EPiServer.Find.Cms.dll</HintPath>
+    </Reference>
     <Reference Include="EPiServer.Find.Framework, Version=13.0.1.0, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
       <HintPath>..\packages\EPiServer.Find.Framework.13.0.1\lib\net461\EPiServer.Find.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="EPiServer.Find.Optimizations, Version=13.0.1.0, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPiServer.Find.Cms.13.0.1\lib\net461\EPiServer.Find.Optimizations.dll</HintPath>
+    </Reference>
+    <Reference Include="EPiServer.Find.Statistics, Version=13.0.1.0, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPiServer.Find.Cms.13.0.1\lib\net461\EPiServer.Find.Statistics.dll</HintPath>
+    </Reference>
+    <Reference Include="EPiServer.Find.UI, Version=13.0.1.0, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPiServer.Find.Cms.13.0.1\lib\net461\EPiServer.Find.UI.dll</HintPath>
     </Reference>
     <Reference Include="EPiServer.Framework, Version=11.9.1.0, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
       <HintPath>..\packages\EPiServer.Framework.11.9.1\lib\net461\EPiServer.Framework.dll</HintPath>
@@ -95,6 +113,15 @@
     </Reference>
     <Reference Include="EPiServer.LinkAnalyzer, Version=11.9.1.0, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
       <HintPath>..\packages\EPiServer.CMS.Core.11.9.1\lib\net461\EPiServer.LinkAnalyzer.dll</HintPath>
+    </Reference>
+    <Reference Include="EPiServer.Shell, Version=11.5.1.0, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPiServer.CMS.UI.Core.11.5.1\lib\net461\EPiServer.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="EPiServer.Shell.UI, Version=11.5.1.0, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPiServer.CMS.UI.Core.11.5.1\lib\net461\EPiServer.Shell.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="EPiServer.UI, Version=11.5.1.0, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPiServer.CMS.UI.Core.11.5.1\lib\net461\EPiServer.UI.dll</HintPath>
     </Reference>
     <Reference Include="EPiServer.Web.WebControls, Version=11.9.1.0, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
       <HintPath>..\packages\EPiServer.CMS.AspNet.11.9.1\lib\net461\EPiServer.Web.WebControls.dll</HintPath>
@@ -172,6 +199,9 @@
     </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Security" />
     <Reference Include="System.Security.AccessControl, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -197,6 +227,12 @@
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
     </Reference>
@@ -220,9 +256,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="OsgSearchProvider.cs" />
-    <Compile Include="OSGSearchResult.cs" />
+    <Compile Include="CatalogEntryWrapper.cs" />
+    <Compile Include="Client.cs" />
+    <Compile Include="FindDocumentBuilder.cs" />
+    <Compile Include="FindProviderExtensions.cs" />
+    <Compile Include="FindSearchProvider.cs" />
+    <Compile Include="FindSearchQueryBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProviderClient.cs" />
+    <Compile Include="ProviderConfiguration.cs" />
+    <Compile Include="ProviderFieldConfiguration.cs" />
+    <Compile Include="SearchDocumentImplementation.cs" />
+    <Compile Include="SearchDocumentsImplementation.cs" />
+    <Compile Include="SearchResultsImplementation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
