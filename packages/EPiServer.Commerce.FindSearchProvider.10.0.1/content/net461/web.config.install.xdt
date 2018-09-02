@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <configSections>
+    <section xdt:Transform="InsertIfMissing" xdt:Locator="Match(name,type)" name="episerver.find" type="EPiServer.Find.Configuration, EPiServer.Find" requirePermission="false" />
+  </configSections>
+</configuration>

@@ -1,0 +1,996 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EPiServer.Commerce.FindSearchProvider</name>
+    </assembly>
+    <members>
+        <member name="T:EPiServer.Commerce.FindSearchProvider.Dictionary2Find.DictionaryConverter">
+            <summary>
+            Converter for dictionary type
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.FindSearchProvider.Dictionary2Find.DictionaryConverter.PropertyNameDesolver">
+            <summary>
+            Gets or sets the property name desolver.
+            </summary>
+            <value>
+            The property name desolver.
+            </value>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.Dictionary2Find.DictionaryConverter.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:EPiServer.Commerce.FindSearchProvider.Dictionary2Find.DictionaryConverter"/> class.
+            </summary>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.Dictionary2Find.DictionaryConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Writes the JSON representation of the object.
+            </summary>
+            <param name="writer">The <see cref="T:Newtonsoft.Json.JsonWriter" /> to write to.</param>
+            <param name="value">The value.</param>
+            <param name="serializer">The calling serializer.</param>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.Dictionary2Find.DictionaryConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Reads the JSON representation of the object.
+            </summary>
+            <param name="reader">The <see cref="T:Newtonsoft.Json.JsonReader" /> to read from.</param>
+            <param name="objectType">Type of the object.</param>
+            <param name="existingValue">The existing value of object being read.</param>
+            <param name="serializer">The calling serializer.</param>
+            <returns>
+            The object value.
+            </returns>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.Dictionary2Find.DictionaryConverter.CanConvert(System.Type)">
+            <summary>
+            Determines whether this instance can convert the specified object type.
+            </summary>
+            <param name="objectType">Type of the object.</param>
+            <returns>
+            <c>true</c> if this instance can convert the specified object type; otherwise, 
+            <c>false</c>.
+            </returns>
+        </member>
+        <member name="T:EPiServer.Commerce.FindSearchProvider.Dictionary2Find.IncludeTypeNameInDictionaryKeyFieldNameConvention">
+            <summary>
+            Convention for field name of dictionary key.
+            </summary>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.Dictionary2Find.IncludeTypeNameInDictionaryKeyFieldNameConvention.ModifyContract(Newtonsoft.Json.Serialization.JsonContract)">
+            <summary>
+            Modifies the contract.
+            </summary>
+            <param name="contract">The contract.</param>
+            <returns>A modified JsonDictionaryContract.</returns>
+        </member>
+        <member name="T:EPiServer.Commerce.FindSearchProvider.FindProviderExtensions">
+            <summary>
+            Extension methods.
+            </summary>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindProviderExtensions.GetField(EPiServer.Find.IClient,System.String,System.String)">
+            <summary>
+            Gets a field descriptor for the named field.
+            </summary>
+            <param name="client">A find client created by the find search provider.</param>
+            <param name="fieldName">The name of the desired field.</param>
+            <param name="locale">The locale of the desired field. If a single-language field exists matching the name, locale is ignored. If locale is null, the field may not be multilanguage.</param>
+            <returns>A field descriptor for the requested field.</returns>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindProviderExtensions.GetField``1(EPiServer.Find.IClient,System.String,System.String)">
+            <summary>
+            Gets a strongly typed field descriptor for the named field.
+            </summary>
+            <typeparam name="TField">The type of the desired field.</typeparam>
+            <param name="client">A find client created by the find search provider.</param>
+            <param name="fieldName">The name of the desired field.</param>
+            <param name="locale">The locale of the desired field. If a single-language field exists matching the name, locale is ignored. If locale is null, the field may not be multilanguage.</param>
+            <returns>A strongly typed field descriptor for the requested field.</returns>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindProviderExtensions.GetPriceField(EPiServer.Find.IClient,System.String,System.String,Mediachase.Commerce.MarketId)">
+            <summary>
+            Gets a strongly typed field descriptor for the named price field.
+            </summary>
+            <param name="client">A find client created by the find search provider.</param>
+            <param name="fieldName">The name of the desired price field. Should be "listprice" or "saleprice".</param>
+            <param name="currency">The currency.</param>
+            <param name="marketId">The market id.</param>
+            <returns>A field descriptor for the requested field.</returns>
+            <exception cref="T:System.Exception">
+            </exception>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindProviderExtensions.ForDefaultFields(EPiServer.Find.ITypeSearch{EPiServer.Commerce.FindSearchProvider.FindDocument},System.String,System.String)">
+            <summary>
+            Searches for the specified query in all default search fields, and in the specified locale.
+            </summary>
+            <param name="search">The search to modify.</param>
+            <param name="query">The query text to search for.</param>
+            <param name="locale">The locale to search in.</param>
+            <returns>The search, modified to include the requested query.</returns>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindProviderExtensions.FilterDates(EPiServer.Find.ITypeSearch{EPiServer.Commerce.FindSearchProvider.FindDocument},System.DateTime,System.DateTime)">
+            <summary>
+            Adds a filter to the specified search requiring that the entries must be available for the entire interval from startDate to endDate.
+            </summary>
+            <remark>
+            Preorder entries are included in results as default.
+            </remark>
+            <param name="search">The search to modify.</param>
+            <param name="startDate">The beginning of the interval where the catalog entries must be available.</param>
+            <param name="endDate">The end of the interval where the catalog entries must be available.</param>
+            <returns>The search, modified to include the requested filter.</returns>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindProviderExtensions.FilterDates(EPiServer.Find.ITypeSearch{EPiServer.Commerce.FindSearchProvider.FindDocument},System.DateTime,System.DateTime,System.Boolean)">
+            <summary>
+            Adds a filter to the specified search requiring that the entries must be available for the entire interval from startDate to endDate, include Preorder entry or not.
+            </summary>
+            <param name="search">The search to modify.</param>
+            <param name="startDate">The beginning of the interval where the catalog entries must be available.</param>
+            <param name="endDate">The end of the interval where the catalog entries must be available.</param>
+            <param name="includePreorderEntry">The preorder catalog entries is available include preorder entries.</param>
+            <returns>The search, modified to include the requested filter.</returns>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindProviderExtensions.FilterLanguages(EPiServer.Find.ITypeSearch{EPiServer.Commerce.FindSearchProvider.FindDocument},System.String)">
+            <summary>
+            Adds a filter to the specified search requiring the entry is available for the specific language
+            </summary>
+            <param name="search">The search to modify</param>
+            <param name="language">the language availability for the entries</param>
+            <returns></returns>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindProviderExtensions.FilterLanguages(EPiServer.Find.ITypeSearch{EPiServer.Commerce.FindSearchProvider.FindDocument},System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Adds a filter to the specified search requiring the entry is available for the specific languages
+            </summary>
+            <param name="search">The search to modify</param>
+            <param name="languages">the languages availability for the entries</param>
+            <returns>The search query</returns>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindProviderExtensions.FilterCatalogs(EPiServer.Find.ITypeSearch{EPiServer.Commerce.FindSearchProvider.FindDocument},System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Adds a filter to the specified search requiring that the entries must be in at least one of the specified catalogs.
+            </summary>
+            <param name="search">The search to modify.</param>
+            <param name="catalogNames">The catalog names to filter on. If the enumeration is empty, no filter is applied.</param>
+            <returns>The search, modified to include the requested filter.</returns>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindProviderExtensions.FilterCatalogNodes(EPiServer.Find.ITypeSearch{EPiServer.Commerce.FindSearchProvider.FindDocument},System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Adds a filter to the specified search requiring that the entries must under one of the specified catalog nodes.
+            </summary>
+            <param name="search">The search to modify.</param>
+            <param name="catalogNodes">The catalog nodes to filter on. If the enumeration is empty, no filter is applied.</param>
+            <returns>The search, modified to include the requested filter.</returns>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindProviderExtensions.FilterOutlines(EPiServer.Find.ITypeSearch{EPiServer.Commerce.FindSearchProvider.FindDocument},System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Adds a filter to the specified search requiring that the entries must match one of the specified outlines.
+            </summary>
+            <param name="search">The search to modify.</param>
+            <param name="outlines">The outlines to filter on. If the enumeration is empty, no filter is applied.</param>
+            <returns>The search, modified to include the requested filter.</returns>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindProviderExtensions.FilterMetaClasses(EPiServer.Find.ITypeSearch{EPiServer.Commerce.FindSearchProvider.FindDocument},System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Adds a filter to the specified search requiring that the entries be of one of the specified meta classes.
+            </summary>
+            <param name="search">The search to modify.</param>
+            <param name="metaClassNames">The metaclasses to filter on. If the enumeration is empty, no filter is applied.</param>
+            <returns>The search, modified to include the requested filter.</returns>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindProviderExtensions.FilterCatalogEntryTypes(EPiServer.Find.ITypeSearch{EPiServer.Commerce.FindSearchProvider.FindDocument},System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Adds a filter to the specified search requiring that the entries be of one of the specified entry types (such as product, variation, etc).
+            </summary>
+            <param name="search">The search to modify.</param>
+            <param name="entryTypes">The entry types to filter on. If the enumeration is empty, no filter is applied.</param>
+            <returns>The search, modified to include the requested filter.</returns>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindProviderExtensions.FilterInactiveCatalogEntries(EPiServer.Find.ITypeSearch{EPiServer.Commerce.FindSearchProvider.FindDocument})">
+            <summary>
+            Filters inactive catalog entries.
+            </summary>
+            <param name="search">The search to modify.</param>
+            <returns>The search, modified to include the requested filter.</returns>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindProviderExtensions.FilterCatalogEntryMarket(EPiServer.Find.ITypeSearch{EPiServer.Commerce.FindSearchProvider.FindDocument},Mediachase.Commerce.MarketId)">
+            <summary>
+            Adds a filter to the specified search requiring that the entries be valid in the specified market.
+            </summary>
+            <param name="search">The search to modify.</param>
+            <param name="marketId">The market id to require entries are valid for.</param>
+            <returns>The search, modified to include the requested filter.</returns>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindProviderExtensions.FilterFieldRange(EPiServer.Find.ITypeSearch{EPiServer.Commerce.FindSearchProvider.FindDocument},System.String,System.String,System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Adds a filter to the specified search requiring that the specified field is in the specified range.
+            </summary>
+            <param name="search">The search to modify.</param>
+            <param name="fieldName">The name of the field to filter on.</param>
+            <param name="locale">The locale of the field to filter on. If the field is not multilanguage, locale is ignored. If locale is null, the field may not be multilanguage.</param>
+            <param name="from">The value for the lower end of the range, represented as a string in the invariant culture.</param>
+            <param name="to">The value for the upper end of the range, represented as a string in the invariant culture.</param>
+            <param name="includeFrom">If true, the lower endpoint is included; otherwise, it is excluded.</param>
+            <param name="includeTo">If true, the upper endpoint is included; otherwise, it is excluded.</param>
+            <returns>The search, modified to include the requested filter.</returns>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindProviderExtensions.FilterFieldRange``1(EPiServer.Find.ITypeSearch{EPiServer.Commerce.FindSearchProvider.FindDocument},System.String,System.String,System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Adds a filter to the specified search requiring that the specified field is in the specified range.
+            </summary>
+            <param name="search">The search to modify.</param>
+            <param name="fieldName">The name of the field to filter on.</param>
+            <param name="locale">The locale of the field to filter on. If the field is not multilanguage, locale is ignored. If locale is null, the field may not be multilanguage.</param>
+            <param name="from">The value for the lower end of the range, represented as a string in the invariant culture.</param>
+            <param name="to">The value for the upper end of the range, represented as a string in the invariant culture.</param>
+            <param name="includeFrom">If true, the lower endpoint is included; otherwise, it is excluded.</param>
+            <param name="includeTo">If true, the upper endpoint is included; otherwise, it is excluded.</param>
+            <returns>The search, modified to include the requested filter.</returns>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindProviderExtensions.FilterFieldRange(EPiServer.Find.ITypeSearch{EPiServer.Commerce.FindSearchProvider.FindDocument},System.String,System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Adds a filter to the specified search requiring that the specified field is in the specified range.
+            </summary>
+            <param name="search">The search to modify.</param>
+            <param name="fieldName">The name of the field to filter on.</param>
+            <param name="from">The value for the lower end of the range, represented as a string in the invariant culture.</param>
+            <param name="to">The value for the upper end of the range, represented as a string in the invariant culture.</param>
+            <param name="includeFrom">If true, the lower endpoint is included; otherwise, it is excluded.</param>
+            <param name="includeTo">If true, the upper endpoint is included; otherwise, it is excluded.</param>
+            <returns>The search, modified to include the requested filter.</returns>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindProviderExtensions.FilterPriceFieldRange(EPiServer.Find.ITypeSearch{EPiServer.Commerce.FindSearchProvider.FindDocument},System.String,System.String,Mediachase.Commerce.MarketId,System.Nullable{System.Double},System.Nullable{System.Double},System.Boolean,System.Boolean)">
+            <summary>
+            Adds a filter to the specified search requiring that the specified price field is in the specified range.
+            </summary>
+            <param name="search">The search to modify.</param>
+            <param name="fieldName">The name of the field to filter on.  This should be "listprice" or "saleprice".</param>
+            <param name="currency">The currency of the price to filter on.</param>
+            <param name="marketId">The market id.</param>
+            <param name="from">The value for the lower end of the range.</param>
+            <param name="to">The value for the upper end of the range.</param>
+            <param name="includeFrom">If true, the lower endpoint is included; otherwise, it is excluded.</param>
+            <param name="includeTo">If true, the upper endpoint is included; otherwise, it is excluded.</param>
+            <returns>The search, modified to include the requested filter.</returns>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindProviderExtensions.FilterFieldRange(EPiServer.Find.ITypeSearch{EPiServer.Commerce.FindSearchProvider.FindDocument},EPiServer.Commerce.FindSearchProvider.IFieldConfiguration,System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Adds a filter to the specified search requiring that the specified field is in the specified range.
+            </summary>
+            <param name="search">The search to modify.</param>
+            <param name="field">The field to filter on.</param>
+            <param name="from">The value for the lower end of the range, represented as a string in the invariant culture.</param>
+            <param name="to">The value for the upper end of the range, represented as a string in the invariant culture.</param>
+            <param name="includeFrom">If true, the lower endpoint is included; otherwise, it is excluded.</param>
+            <param name="includeTo">If true, the upper endpoint is included; otherwise, it is excluded.</param>
+            <returns>The search, modified to include the requested filter.</returns>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindProviderExtensions.AddActiveFilters(EPiServer.Find.ITypeSearch{EPiServer.Commerce.FindSearchProvider.FindDocument},Mediachase.Search.ISearchCriteria)">
+            <summary>
+            Adds the active filters from an ISearchCriteria object to an existing search.
+            </summary>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindProviderExtensions.AddActiveFilter(EPiServer.Find.ITypeSearch{EPiServer.Commerce.FindSearchProvider.FindDocument},System.String,Mediachase.Search.ISearchFilterValue,System.String,Mediachase.Commerce.MarketId)">
+            <summary>
+            Adds a single active filter from an ISearchCriteria object to an existing search.
+            </summary>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindProviderExtensions.AddFacets(EPiServer.Find.ITypeSearch{EPiServer.Commerce.FindSearchProvider.FindDocument},Mediachase.Search.ISearchCriteria)">
+            <summary>
+            Adds the faceting criteria from an ISearchCriteria object to an existing search.
+            </summary>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindProviderExtensions.AddFacet(EPiServer.Find.ITypeSearch{EPiServer.Commerce.FindSearchProvider.FindDocument},Mediachase.Search.SearchFilter,System.String)">
+            <summary>
+            Adds faceting requests to the search for the specified filter and locale.
+            </summary>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindProviderExtensions.AddPriceFacet(EPiServer.Find.ITypeSearch{EPiServer.Commerce.FindSearchProvider.FindDocument},Mediachase.Search.SearchFilter,Mediachase.Commerce.Currency,Mediachase.Commerce.MarketId)">
+            <summary>
+            Adds faceting requests to the search for the specified pricing.
+            </summary>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindProviderExtensions.OrderBy(EPiServer.Find.ITypeSearch{EPiServer.Commerce.FindSearchProvider.FindDocument},Mediachase.Search.ISearchCriteria)">
+            <summary>
+            Adds the ordering requests from an ISearchCriteria object to an existing search.
+            </summary>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindProviderExtensions.OrderByField``1(EPiServer.Find.ITypeSearch{EPiServer.Commerce.FindSearchProvider.FindDocument},EPiServer.Commerce.FindSearchProvider.IFieldConfiguration{``0},System.Boolean)">
+            <summary>
+            Adds an ascending ordering request for the specified field to an existing search.
+            </summary>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindProviderExtensions.OrderByFieldDescending``1(EPiServer.Find.ITypeSearch{EPiServer.Commerce.FindSearchProvider.FindDocument},EPiServer.Commerce.FindSearchProvider.IFieldConfiguration{``0})">
+            <summary>
+            Adds a descending ordering request for the specified field to an existing search.
+            </summary>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindProviderExtensions.ThenByField``1(EPiServer.Find.ITypeSearch{EPiServer.Commerce.FindSearchProvider.FindDocument},EPiServer.Commerce.FindSearchProvider.IFieldConfiguration{``0},System.Boolean)">
+            <summary>
+            Adds a code-ordered ascending ordering request for the specified field to an existing search.
+            </summary>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindProviderExtensions.ThenByFieldDescending``1(EPiServer.Find.ITypeSearch{EPiServer.Commerce.FindSearchProvider.FindDocument},EPiServer.Commerce.FindSearchProvider.IFieldConfiguration{``0})">
+            <summary>
+            Adds a code-ordered descending ordering request for the specified field to an existing search.
+            </summary>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindProviderExtensions.GetConfiguration(EPiServer.Find.IClient)">
+            <summary>
+            Gets the configuration.
+            </summary>
+            <param name="client">The client.</param>
+            <returns></returns>
+            <exception cref="T:System.NotSupportedException">Find Provider for Commerce extensions will only work on searches against the provider-created client.</exception>
+        </member>
+        <member name="T:EPiServer.Commerce.FindSearchProvider.FindSearchProviderConventions">
+            <summary>
+            Conventions for the find search provider.
+            </summary>
+        </member>
+        <member name="F:EPiServer.Commerce.FindSearchProvider.FindSearchProviderConventions.DefaultQueryCultureOption">
+            <summary>
+            The default query language option.
+            </summary>
+        </member>
+        <member name="T:EPiServer.Commerce.FindSearchProvider.IFieldConfiguration">
+            <summary>
+            Base interface for field configuration.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.FindSearchProvider.IFieldConfiguration.Name">
+            <summary>
+            The name of the field.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.FindSearchProvider.IFieldConfiguration.Locale">
+            <summary>
+            For multi-language fields, the language; otherwise null.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.FindSearchProvider.IFieldConfiguration.Currency">
+            <summary>
+            For price fields, the currency; otherwise null.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.FindSearchProvider.IFieldConfiguration.MarketId">
+            <summary>
+            For price fields, the market; otherwise null.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.FindSearchProvider.IFieldConfiguration.Type">
+            <summary>
+            The type of the field.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.FindSearchProvider.IFieldConfiguration.IsDynamicField">
+            <summary>
+            If false, the field is stored in a property; if true, the field is stored in a dictionary.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.FindSearchProvider.IFieldConfiguration.IsIncludedInDefaultSearch">
+            <summary>
+            If true, the field may be included in a default query string search.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.FindSearchProvider.IFieldConfiguration.GetValueExpression">
+            <summary>
+            Gets the GetTypedValueExpression property value without knowledge of type information.
+            </summary>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.IFieldConfiguration.GetObjectValue(EPiServer.Commerce.FindSearchProvider.FindDocument)">
+            <summary>
+            Gets the value of this field, as an object, from the specified document.
+            </summary>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.IFieldConfiguration.SetObjectValue(EPiServer.Commerce.FindSearchProvider.FindDocument,System.Object)">
+            <summary>
+            Sets the value of this field to the value of an object.  The object must be castable to the field type.
+            </summary>
+        </member>
+        <member name="T:EPiServer.Commerce.FindSearchProvider.IFieldConfiguration`1">
+            <summary>
+            Generic version for field configuration.
+            </summary>
+            <typeparam name="TField">The type of the field.</typeparam>
+        </member>
+        <member name="P:EPiServer.Commerce.FindSearchProvider.IFieldConfiguration`1.TypedGetValueExpression">
+            <summary>
+            An expression for retrieving the value of the field.
+            </summary>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.IFieldConfiguration`1.GetValue(EPiServer.Commerce.FindSearchProvider.FindDocument)">
+            <summary>
+            Gets the value of this field from the specified document.
+            </summary>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.IFieldConfiguration`1.SetValue(EPiServer.Commerce.FindSearchProvider.FindDocument,`0)">
+            <summary>
+            Sets the value of this field in the specified document.
+            </summary>
+        </member>
+        <member name="T:EPiServer.Commerce.FindSearchProvider.ISearchConfiguration">
+            <summary>
+            Base interface for search configuration.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.FindSearchProvider.ISearchConfiguration.ServiceUrl">
+            <summary>
+            The service URL for the EPiServer Find instance.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.FindSearchProvider.ISearchConfiguration.DefaultIndex">
+            <summary>
+            The default index for the EPiServer Find index.
+            </summary>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.ISearchConfiguration.GetField(System.String,System.String)">
+            <summary>
+            Gets the field.
+            </summary>
+            <param name="name">The name.</param>
+            <param name="locale">The locale.</param>
+            <returns></returns>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.ISearchConfiguration.GetPriceField(System.String,Mediachase.Commerce.Currency,Mediachase.Commerce.MarketId)">
+            <summary>
+            Gets the price field.
+            </summary>
+            <param name="name">The name.</param>
+            <param name="currency">The currency.</param>
+            <param name="marketId">The market identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.ISearchConfiguration.GetAnyField(System.String,System.String,Mediachase.Commerce.Currency,Mediachase.Commerce.MarketId)">
+            <summary>
+            Gets any field.
+            </summary>
+            <param name="name">The name.</param>
+            <param name="locale">The locale.</param>
+            <param name="currency">The currency.</param>
+            <param name="marketId">The market identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.ISearchConfiguration.TryGetField(System.String,System.String,EPiServer.Commerce.FindSearchProvider.IFieldConfiguration@)">
+            <summary>
+            Tries the get field.
+            </summary>
+            <param name="name">The name.</param>
+            <param name="locale">The locale.</param>
+            <param name="field">The field.</param>
+            <returns></returns>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.ISearchConfiguration.TryGetPriceField(System.String,Mediachase.Commerce.Currency,Mediachase.Commerce.MarketId,EPiServer.Commerce.FindSearchProvider.IFieldConfiguration{System.Nullable{System.Double}}@)">
+            <summary>
+            Tries the get price field.
+            </summary>
+            <param name="name">The name.</param>
+            <param name="currency">The currency.</param>
+            <param name="marketId">The market identifier.</param>
+            <param name="field">The field.</param>
+            <returns></returns>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.ISearchConfiguration.TryGetAnyField(System.String,System.String,Mediachase.Commerce.Currency,Mediachase.Commerce.MarketId,EPiServer.Commerce.FindSearchProvider.IFieldConfiguration@)">
+            <summary>
+            Tries the get any field.
+            </summary>
+            <param name="name">The name.</param>
+            <param name="locale">The locale.</param>
+            <param name="currency">The currency.</param>
+            <param name="marketId">The market identifier.</param>
+            <param name="field">The field.</param>
+            <returns></returns>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.ISearchConfiguration.GetDefaultFields(System.String)">
+            <summary>
+            Gets the fields to be included in a search against the passed locale.
+            </summary>
+            <param name="locale"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.ISearchConfiguration.GetDefaultFields">
+            <summary>
+            Gets the default fields which all available locales.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.ISearchConfiguration.GetDynamicFields(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Gets dynamic fields that are either single-language or match one of the specified locales.
+            </summary>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.ISearchConfiguration.GetAllFields(System.String)">
+            <summary>
+            Gets all fields that are either single-language or match the specified locale, including backwards compatibility fields.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.ISearchConfiguration.AddLocale(System.String)">
+            <summary>
+            Makes the configuration aware that the passed locale is in use.
+            </summary>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.ISearchConfiguration.AddCurrency(Mediachase.Commerce.Currency)">
+            <summary>
+            Makes the configuration aware that the passed currency is in use.
+            </summary>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.ISearchConfiguration.AddMarket(Mediachase.Commerce.MarketId)">
+            <summary>
+            Makes the configuration away that the passed market is in use.
+            </summary>
+            <param name="marketId"></param>
+        </member>
+        <member name="T:EPiServer.Commerce.FindSearchProvider.FindDocument">
+            <summary>
+            Represent data of a Find document for catalog entry.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.FindSearchProvider.FindDocument.CatalogEntryId">
+            <summary>
+            The numeric catalog entry identifier (unique).
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.FindSearchProvider.FindDocument.CatalogEntryCode">
+            <summary>
+            The string catalog entry identifier (unique per application id).
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.FindSearchProvider.FindDocument.MetaClassName">
+            <summary>
+            The name of the metaclass for this entry.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.FindSearchProvider.FindDocument.CatalogEntryType">
+            <summary>
+            The type of the catalog entry (variation, product, etc).
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.FindSearchProvider.FindDocument.AllowPreorder">
+            <summary>
+            The flag define this entry allow preorder or not.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.FindSearchProvider.FindDocument.PreorderAvailableDate">
+            <summary>
+            The preorder available date of the entry in UTC.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.FindSearchProvider.FindDocument.StartDate">
+            <summary>
+            The start date of the entry in UTC.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.FindSearchProvider.FindDocument.EndDate">
+            <summary>
+            The end date of the entry in UTC.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.FindSearchProvider.FindDocument.Languages">
+            <summary>
+            The available languages for the entry.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.FindSearchProvider.FindDocument.Currencies">
+            <summary>
+            The available currencies for the entry.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.FindSearchProvider.FindDocument.Markets">
+            <summary>
+            The available markets for the entry.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.FindSearchProvider.FindDocument.Catalogs">
+            <summary>
+            The catalogs which contain the entry.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.FindSearchProvider.FindDocument.Outlines">
+            <summary>
+            The outlines describing the entry's locations.
+            </summary>
+            <remarks>
+            The outline is formatted as {catalog name}/{node code}/.../{node code}.
+            Any forward slash in a catalog name or node code will be converted to an underscore, and all outlines are indexed as lower case.
+            </remarks>
+        </member>
+        <member name="P:EPiServer.Commerce.FindSearchProvider.FindDocument.CatalogNodes">
+            <summary>
+            All individual node codes found in the outlines.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.FindSearchProvider.FindDocument.Name">
+            <summary>
+            The name of the entry.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.FindSearchProvider.FindDocument.IsActive">
+            <summary>
+            Flag indicates entry is active or not.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.FindSearchProvider.FindDocument.ListPrices">
+            <summary>
+            The lowest price available to all customers at any quantity, for each configured currency and market.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.FindSearchProvider.FindDocument.SalePrices">
+            <summary>
+            The lowest price for each configured currency and market.
+            </summary>
+            <remarks>
+            The lowest price is taken from all prices, regardless of customer pricing or minimum quantity.
+            </remarks>
+        </member>
+        <member name="P:EPiServer.Commerce.FindSearchProvider.FindDocument.StringFields">
+            <summary>
+            All metafields that are indexed as string.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.FindSearchProvider.FindDocument.StringCollectionFields">
+            <summary>
+            All metafields that are indexed as collections of strings.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.FindSearchProvider.FindDocument.IntFields">
+            <summary>
+            All metafields that are indexed as integers.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.FindSearchProvider.FindDocument.BoolFields">
+            <summary>
+            All metafields that are indexed as booleans.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.FindSearchProvider.FindDocument.LongFields">
+            <summary>
+            All metafields that are indexed as longs.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.FindSearchProvider.FindDocument.DoubleFields">
+            <summary>
+            All metafield that are indexed as doubles.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.FindSearchProvider.FindDocument.DateTimeFields">
+            <summary>
+            All metafields that are indexed as datetimes.
+            </summary>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindDocument.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:EPiServer.Commerce.FindSearchProvider.FindDocument"/> class.
+            </summary>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindDocument.#ctor(EPiServer.Commerce.FindSearchProvider.FindDocument)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EPiServer.Commerce.FindSearchProvider.FindDocument"/> class.
+            </summary>
+            <param name="source">The source.</param>
+        </member>
+        <member name="T:EPiServer.Commerce.FindSearchProvider.FindSearchIndexBuilder">
+            <summary>
+            Catalog index builder for Find
+            </summary>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindSearchIndexBuilder.IndexCatalogEntryDto(Mediachase.Search.IndexBuilder,Mediachase.Commerce.Catalog.Dto.CatalogEntryDto.CatalogEntryRow,System.String,System.String[])">
+            <summary>
+            Indexes the catalog entry dto.
+            </summary>
+            <param name="indexer">The indexer.</param>
+            <param name="entryRow">The entry row.</param>
+            <param name="defaultCurrency">The default currency.</param>
+            <param name="languages">The languages.</param>
+            <returns></returns>
+        </member>
+        <member name="T:EPiServer.Commerce.FindSearchProvider.FindSearchProvider">
+            <summary>
+            A search provider implementation for EPiServer Find.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.FindSearchProvider.FindSearchProvider.Client">
+            <summary>
+            Gets the client.
+            </summary>
+            <value>
+            The client.
+            </value>
+        </member>
+        <member name="P:EPiServer.Commerce.FindSearchProvider.FindSearchProvider.Configuration">
+            <summary>
+            Gets the configuration.
+            </summary>
+            <value>
+            The configuration.
+            </value>
+        </member>
+        <member name="P:EPiServer.Commerce.FindSearchProvider.FindSearchProvider.QueryBuilderType">
+            <summary>
+            Gets the class type of the query builder. This class will be used to dynamically convert SearchCriteria to the query
+            that Search Provider can understand.
+            </summary>
+            <value>
+            The type of the query builder.
+            </value>
+            <example>
+            // the following type will build query for the SOLR server
+            "Mediachase.Search.Providers.Solr.SolrSearchQueryBuilder, Mediachase.Search.SolrSearchProvider"
+            </example>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindSearchProvider.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:EPiServer.Commerce.FindSearchProvider.FindSearchProvider"/> class.
+            </summary>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindSearchProvider.#ctor(EPiServer.Commerce.FindSearchProvider.FindSearchProviderConventions)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EPiServer.Commerce.FindSearchProvider.FindSearchProvider"/> class.
+            <param name="findSearchProviderConventions">The find search provide conventions.</param>
+            </summary>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindSearchProvider.Initialize(System.String,System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Initializes the provider.
+            </summary>
+            <param name="name">The friendly name of the provider.</param>
+            <param name="config">A collection of the name/value pairs representing the provider-specific attributes specified in the configuration for this provider.</param>
+            <exception cref="T:System.ArgumentNullException">config</exception>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindSearchProvider.Search(System.String,Mediachase.Search.ISearchCriteria)">
+            <summary>
+            Searches the datasource using the specified criteria.
+            </summary>
+            <param name="applicationName">Name of the application.</param>
+            <param name="criteria">The criteria.</param>
+            <returns></returns>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindSearchProvider.Index(System.String,System.String,Mediachase.Search.ISearchDocument)">
+            <summary>
+            Adds the document to the index. Depending on the provider, the document will be commited only after commit is called.
+            </summary>
+            <param name="applicationName">Name of the application.</param>
+            <param name="scope">The scope.</param>
+            <param name="document">The document.</param>
+            <exception cref="T:System.ArgumentNullException">document</exception>
+            <exception cref="T:System.NotSupportedException">The EPiServer Find search provider requires the use of the FindSearchIndexBuilder.  Please update your search configuration.</exception>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindSearchProvider.Remove(System.String,System.String,System.String,System.String)">
+            <summary>
+            Removes the document by specifying scope (core in SOLR), key (a field that can be used to lookup for a document) and
+            value of the key.
+            </summary>
+            <param name="applicationName">Name of the application.</param>
+            <param name="scope">The scope.</param>
+            <param name="key">The key.</param>
+            <param name="value">The value.</param>
+            <returns></returns>
+            <exception cref="T:System.NotSupportedException"></exception>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindSearchProvider.RemoveAll(System.String,System.String)">
+            <summary>
+            Removes all documents in the specified scope.
+            </summary>
+            <param name="applicationName">Name of the application.</param>
+            <param name="scope">The scope.</param>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindSearchProvider.Close(System.String,System.String)">
+            <summary>
+            Closes the specified provider.
+            </summary>
+            <param name="applicationName">Name of the application.</param>
+            <param name="scope">The scope.</param>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindSearchProvider.Commit(System.String)">
+            <summary>
+            Commits changes made to this instance.
+            </summary>
+            <param name="applicationName">Name of the application.</param>
+        </member>
+        <member name="T:EPiServer.Commerce.FindSearchProvider.FindSearchQueryBuilder">
+            <summary>
+            Query builder for Find.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.FindSearchProvider.FindSearchQueryBuilder.Search">
+            <summary>
+            Gets the search.
+            </summary>
+            <value>
+            The search.
+            </value>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindSearchQueryBuilder.#ctor(EPiServer.Find.IClient,Mediachase.Search.ISearchCriteria)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EPiServer.Commerce.FindSearchProvider.FindSearchQueryBuilder"/> class.
+            </summary>
+            <param name="client">The client.</param>
+            <param name="criteria">The criteria.</param>
+            <exception cref="T:System.InvalidOperationException">The Find search query builder only works with clients created by the provider.</exception>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindSearchQueryBuilder.#ctor(EPiServer.Find.IClient,Mediachase.Search.ISearchCriteria,EPiServer.Commerce.FindSearchProvider.QueryCultureOption)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EPiServer.Commerce.FindSearchProvider.FindSearchQueryBuilder"/> class.
+            </summary>
+            <param name="client">The client.</param>
+            <param name="criteria">The criteria.</param>
+            <param name="languageOption">The language option.</param>
+            <exception cref="T:System.InvalidOperationException">The Find search query builder only works with clients created by the provider.</exception>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.FindSearchQueryBuilder.BuildQuery(Mediachase.Search.ISearchCriteria)">
+            <summary>
+            Builds the query fromt he provided search criteria.
+            </summary>
+            <param name="criteria">The criteria.</param>
+            <returns></returns>
+            <exception cref="T:System.NotSupportedException">Please provide search query description to the constructor.</exception>
+        </member>
+        <member name="T:EPiServer.Commerce.FindSearchProvider.LocalImplementation.Expressions">
+            <summary>
+            Helper class for <see cref="T:System.Linq.Expressions.Expression"/>
+            </summary>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.LocalImplementation.Expressions.CloseFieldAccessParameter``1(System.Linq.Expressions.Expression{System.Func{EPiServer.Commerce.FindSearchProvider.FindDocument,``0}})">
+            <summary>
+            Converts the parameters of a method call expression to constants, and returns a method call
+            using the constant parameters.
+            </summary>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.LocalImplementation.Expressions.ComposeFilter``1(System.Linq.Expressions.Expression{System.Func{EPiServer.Commerce.FindSearchProvider.FindDocument,``0}},System.Linq.Expressions.Expression{System.Func{``0,EPiServer.Find.Api.Querying.Filter}})">
+            <summary>
+            Composes a document to filter expression from a document to value and value to filter expression.
+            The value of filter expression is expected to consist of static (extension) methods taking the
+            document value as the first (this) expression, or any unary or binary operators on such methods.
+            The filter expression must return a result implicitly assignable to TFilter.
+            </summary>
+            <typeparam name="TField">The type of field beign filtered on.</typeparam>
+            <param name="fieldExpression">An expression getting a value from a document.</param>
+            <param name="filterExpression">And expression of filters on a value.</param>
+            <returns>An expression creating the filters of filterExpression against a document.</returns>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.LocalImplementation.ProviderFieldConfiguration`1.#ctor(System.String,System.Linq.Expressions.Expression{System.Func{EPiServer.Commerce.FindSearchProvider.FindDocument,`0}},System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EPiServer.Commerce.FindSearchProvider.LocalImplementation.ProviderFieldConfiguration`1"/> class, with option to include in default search.
+            </summary>
+            <param name="name">Name of the field.</param>
+            <param name="getter">The getter expression.</param>
+            <param name="isIncludedInDefaultSearch">if set to <c>true</c> this field will be included in default search.</param>
+        </member>
+        <member name="T:EPiServer.Commerce.FindSearchProvider.LocalImplementation.ProviderClient">
+            <summary>
+            This class is intended for internal use only.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.FindSearchProvider.LocalImplementation.ProviderClient.ProviderConfiguration">
+            <summary>
+            This property is intended for internal use only.
+            </summary>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.LocalImplementation.ProviderClient.#ctor(EPiServer.Commerce.FindSearchProvider.ISearchConfiguration)">
+            <summary>
+            For internal use only.
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="T:EPiServer.Commerce.FindSearchProvider.LocalImplementation.UntypedFilterBuilder">
+            <summary>
+            Filter builder for untyped objects.
+            </summary>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.LocalImplementation.UntypedFilterBuilder.GetMatchFilter(EPiServer.Commerce.FindSearchProvider.IFieldConfiguration,System.String)">
+            <summary>
+            Gets the match filter.
+            </summary>
+            <param name="field">The field.</param>
+            <param name="value">The value.</param>
+            <returns></returns>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.LocalImplementation.UntypedFilterBuilder.GetRangeFilter(EPiServer.Commerce.FindSearchProvider.IFieldConfiguration,System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Gets the range filter.
+            </summary>
+            <param name="field">The field.</param>
+            <param name="from">From.</param>
+            <param name="to">To.</param>
+            <param name="includeFrom">if set to <c>true</c> [include from].</param>
+            <param name="includeTo">if set to <c>true</c> [include to].</param>
+            <returns></returns>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.LocalImplementation.UntypedFilterBuilder.GetIntRangeFilter(EPiServer.Commerce.FindSearchProvider.IFieldConfiguration,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Boolean,System.Boolean)">
+            <summary>
+            Gets the int range filter.
+            </summary>
+            <param name="field">The field.</param>
+            <param name="from">The value for the lower end of the range, represented as a string in the invariant culture.</param>
+            <param name="to">The value for the upper end of the range, represented as a string in the invariant culture.</param>
+            <param name="includeFrom">If true, the lower endpoint is included; otherwise, it is excluded.</param>
+            <param name="includeTo">If true, the upper endpoint is included; otherwise, it is excluded.</param>
+            <returns></returns>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.LocalImplementation.UntypedFilterBuilder.GetNonNullIntRangeFilter(EPiServer.Commerce.FindSearchProvider.IFieldConfiguration,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Boolean,System.Boolean)">
+            <summary>
+            Gets the non null int range filter.
+            </summary>
+            <param name="field">The field.</param>
+            <param name="from">The value for the lower end of the range, represented as a string in the invariant culture.</param>
+            <param name="to">The value for the upper end of the range, represented as a string in the invariant culture.</param>
+            <param name="includeFrom">If true, the lower endpoint is included; otherwise, it is excluded.</param>
+            <param name="includeTo">If true, the upper endpoint is included; otherwise, it is excluded.</param>
+            <returns></returns>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.LocalImplementation.UntypedFilterBuilder.GetLongRangeFilter(EPiServer.Commerce.FindSearchProvider.IFieldConfiguration,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Boolean,System.Boolean)">
+            <summary>
+            Gets the long range filter.
+            </summary>
+            <param name="field">The field.</param>
+            <param name="from">The value for the lower end of the range, represented as a string in the invariant culture.</param>
+            <param name="to">The value for the upper end of the range, represented as a string in the invariant culture.</param>
+            <param name="includeFrom">If true, the lower endpoint is included; otherwise, it is excluded.</param>
+            <param name="includeTo">If true, the upper endpoint is included; otherwise, it is excluded.</param>
+            <returns></returns>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.LocalImplementation.UntypedFilterBuilder.GetDoubleRangeFilter(EPiServer.Commerce.FindSearchProvider.IFieldConfiguration,System.Nullable{System.Double},System.Nullable{System.Double},System.Boolean,System.Boolean)">
+            <summary>
+            Gets the double range filter.
+            </summary>
+            <param name="field">The field.</param>
+            <param name="from">The value for the lower end of the range, represented as a string in the invariant culture.</param>
+            <param name="to">The value for the upper end of the range, represented as a string in the invariant culture.</param>
+            <param name="includeFrom">If true, the lower endpoint is included; otherwise, it is excluded.</param>
+            <param name="includeTo">If true, the upper endpoint is included; otherwise, it is excluded.</param>
+            <returns></returns>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.LocalImplementation.UntypedFilterBuilder.GetDateTimeRangeFilter(EPiServer.Commerce.FindSearchProvider.IFieldConfiguration,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Boolean,System.Boolean)">
+            <summary>
+            Gets the date time range filter.
+            </summary>
+            <param name="field">The field.</param>
+            <param name="from">The value for the lower end of the range, represented as a string in the invariant culture.</param>
+            <param name="to">The value for the upper end of the range, represented as a string in the invariant culture.</param>
+            <param name="includeFrom">If true, the lower endpoint is included; otherwise, it is excluded.</param>
+            <param name="includeTo">If true, the upper endpoint is included; otherwise, it is excluded.</param>
+            <returns></returns>
+        </member>
+        <member name="M:EPiServer.Commerce.FindSearchProvider.LocalImplementation.UntypedFilterBuilder.GetNonNullDateTimeFilter(EPiServer.Commerce.FindSearchProvider.IFieldConfiguration,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Boolean,System.Boolean)">
+            <summary>
+            Gets the non null date time filter.
+            </summary>
+            <param name="field">The field.</param>
+            <param name="from">The value for the lower end of the range, represented as a string in the invariant culture.</param>
+            <param name="to">The value for the upper end of the range, represented as a string in the invariant culture.</param>
+            <param name="includeFrom">If true, the lower endpoint is included; otherwise, it is excluded.</param>
+            <param name="includeTo">If true, the upper endpoint is included; otherwise, it is excluded.</param>
+            <returns></returns>
+        </member>
+        <member name="T:EPiServer.Commerce.FindSearchProvider.LocalImplementation.CatalogEntryWrapper">
+            <summary>
+            Encapsulates a catalog entry so that the indexer can pass it through the search API from the
+            find index builder to the find search provider.  Fields and methods that are not implemented
+            will never be accessed.
+            </summary>
+        </member>
+        <member name="T:EPiServer.Commerce.FindSearchProvider.QueryCultureOption">
+            <summary>
+            Specifies if specific culture, neutral culture, or both should be used in a query.
+            </summary>
+        </member>
+        <member name="F:EPiServer.Commerce.FindSearchProvider.QueryCultureOption.Specific">
+            <summary>
+            Specific culture, for example 'en-US'.
+            </summary>
+        </member>
+        <member name="F:EPiServer.Commerce.FindSearchProvider.QueryCultureOption.Neutral">
+            <summary>
+            Neutral culture, for example 'en'.
+            </summary>
+        </member>
+        <member name="F:EPiServer.Commerce.FindSearchProvider.QueryCultureOption.SpecificAndNeutral">
+            <summary>
+            Both specific and neutral culture.
+            </summary>
+        </member>
+    </members>
+</doc>
